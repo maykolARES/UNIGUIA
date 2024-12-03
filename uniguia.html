@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGuia</title>
+    <style>
+         body{
+  background-image: url('https://www.mediasource.mx/hubfs/blog-files/fondos-web.jpg'); 
+  background-size: cover;        
+  background-repeat: no-repeat;  
+  background-position: center;  
+  background-attachment: fixed; 
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .register-screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+          background-color: transparent; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .register-box {
+             background-color: rgba(0, 0, 0, 0.2); 
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+        }
+        .register-box input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .register-box button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            box-sizing: border-box;
+            display: none;
+        }
+        header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        header nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .call-btn {
+            background-color: #ff4500;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .hero-section {
+            background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3QHKm8lUm0De_DvN747tZ-nmZ37hQRBWSPUT9suww5yBxvALYaeEN08NDjHAbLEmmChY&usqp=CAU') no-repeat center center/cover; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .hero-buttons .option-btn {
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+        .info-box {
+            display: none;
+             background-color: transparent; /* Hace el fondo transparente */
+            color: black;
+            padding: 30px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .tramites-becas {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .tramites-becas h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: black; 
+        }
+        .tramites-becas .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .tramites-becas .info-box div {
+            background-color: #383534;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+            cursor: pointer; 
+        }
+        .tramites-becas .info-box div img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .requisitos {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .requisitos h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: black; 
+        }
+        .requisitos .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .requisitos .info-box div {
+            background-color:  #383534;
+            color: black;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .requisitos .info-box div img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .carnet-biblioteca {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .carnet-biblioteca h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: black; 
+        }
+        .carnet-biblioteca .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .carnet-biblioteca .info-box div {
+            background-color: #383534;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .carnet-biblioteca .info-box div img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .pasos-becas {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .pasos-becas h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            color: black; 
+        }
+        .pasos-becas .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pasos-becas .info-box div {
+            margin: 10px;
+            text-align: left;
+        }
+        .pasos-becas .info-box div img {
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+        }
+.losas-grass {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+.losas-grass h2 {
+    font-size: 3em;
+    margin-bottom: 40px; 
+    color: black; 
+}
+.losas-grass .info-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; 
+    margin-top: 20px;
+}
+.losas-grass .info-box div {
+     background-color: transparent; 
+    color: black;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 250px; 
+    text-align: center;
+}
+.losas-grass .info-box div img {
+    width: 100%; 
+    height: auto;
+    border-radius: 5px;
+    max-width: 220px; 
+}
+        .carnet-universitario {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .carnet-universitario h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: black; 
+        }
+        .carnet-universitario .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .carnet-universitario .info-box div {
+            background-color: #383534;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .carnet-universitario .info-box div img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .ingreso-comedor {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .ingreso-comedor h2 {
+            font-size: 3em;
+            margin-bottom: 40px; 
+            color: black; 
+        }
+        .ingreso-comedor .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .ingreso-comedor .info-box div {
+            background-color: #383534;
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+        .ingreso-comedor .info-box div img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .info-restaurante {
+            display: none; 
+            text-align: center;
+            padding: 20px;
+        }
+        .info-restaurante h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: black;
+        }
+        .info-restaurante .info-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .info-restaurante .info-box img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+        }
+        .restaurant-images {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .restaurant-images img {
+            width: 24%; 
+            margin: 0 35%; 
+            border-radius: 5px;
+        }
+      .contacto {
+    display: none; /* Ocultar inicialmente */
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff; /* Azul claro */
+    color: white; 
+    border-radius: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+    margin: 50px auto; /* Margen para que se centre y tenga espacio */
+    width: 80%; /* Ancho del contenedor */
+    max-width: 600px; /* Ancho máximo para que no se extienda demasiado */
+}
+
+.contacto h2 {
+    font-size: 3em;
+    margin-bottom: 40px;
+    color: white; /* Color del título */
+}
+
+.contacto form {
+    display: flex;
+    flex-direction: column; /* Elementos apilados verticalmente */
+    gap: 15px; /* Espacio entre los elementos */
+    padding: 20px;
+}
+
+.contacto label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contacto input,
+.contacto textarea {
+    padding: 10px;
+    border: 1px solid white; /* Borde blanco */
+    border-radius: 5px; 
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco semitransparente */
+    color: white; /* Color del texto */
+}
+
+.contacto textarea {
+    height: 100px; /* Altura del textarea */
+}
+
+.contacto button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Transición suave para el botón */
+}
+
+.contacto button:hover {
+    background-color: #c83700; /* Color del botón al pasar el mouse */
+}
+       .acerca {
+            display: none; /* Ocultar inicialmente */
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+            color: white; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+            margin: 50px auto; /* Margen para que se centre y tenga espacio */
+            width: 80%; /* Ancho del contenedor */
+            max-width: 600px; /* Ancho máximo para que no se extienda demasiado */
+        }
+
+        .acerca h2 {
+            font-size: 3em;
+            margin-bottom: 40px;
+            color: white; /* Color del título */
+        }
+
+        /* Estilo para los cuadros dentro de la sección "Acerca de" */
+        .acerca .info-box {
+            display: flex; /* Mostrar los cuadros */
+            flex-wrap: wrap; /* Permitir que los cuadros se envuelvan */
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .acerca .info-box div {
+            background-color: black; /* Fondo negro para los cuadros */
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 48%; /* Ancho de cada cuadro (aproximadamente la mitad del contenedor) */
+            text-align: center;
+            box-sizing: border-box; /* Incluir el padding y el border en el ancho */
+        }
+
+        .acerca .info-box div img {
+            width: 100%; /* Aumentar el tamaño de las imágenes */
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Estilo para el primer cuadro */
+        .acerca .info-box div:first-child {
+            width: 100%; /* Ancho completo para el primer cuadro */
+            flex-direction: column; /* Organizar el contenido del primer cuadro en columnas */
+        }
+
+        .acerca .info-box div:first-child img {
+            margin-top: 10px; /* Agregar margen superior a la imagen del primer cuadro */
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="register-screen" id="register-screen">
+        <div class="register-box">
+            <h2>Registro</h2>
+            <input type="text" id="nombre" placeholder="Nombre completo" required>
+            <input type="text" id="codigo" placeholder="Código de matrícula" required>
+            <input type="text" id="facultad" placeholder="Facultad" required>
+            <button onclick="registrar()">Registrar</button>
+        </div>
+    </div>
+    <header>
+        <div class="logo">UniGuia</div>
+        <nav>
+            <a href="#acerca">Acerca de</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+    <div class="hero-section">
+        <h1 style="font-size: 5em;">uncp</h1> 
+        <p style="font-size: 1em;">Recuerda que cada esfuerzo cuenta. La universidad no solo te forma profesionalmente, sino también como persona. Persevera, confía en ti mismo, y verás cómo tus sueños se convierten en realidad.</p> 
+        <div class="hero-buttons" style="display: flex; justify-content: center;">
+            <div class="option-btn" onclick="showTramitesBecas()" style="margin: 10px; position: relative; cursor: pointer;">
+                <img src="https://i.postimg.cc/SNR4Cpn8/Captura-de-pantalla-2024-12-01-114502.png" alt="Opción 1" style="width: 200px; height: auto; border-radius: 5px;">
+                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: white; background-color: rgba(0, 0, 0, 0.7); padding: 5px; border-radius: 5px;">Trámites y Becas</div>
+            </div>
+            <div class="option-btn" onclick="showLosas()" style="margin: 10px; position: relative; cursor: pointer;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeMmPaqmeNLmCParZBjJ4tk4jB4v2e3sxdzQ&s" alt="Opción 2" style="width: 200px; height: auto; border-radius: 5px;">
+                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: white; background-color: rgba(0, 0, 0, 0.7); padding: 5px; border-radius: 5px;">Losas y Grass</div>
+            </div>
+            <div class="option-btn" onclick="showRestaurantes()" style="margin: 10px; position: relative; cursor: pointer;">
+                <img src="https://www.exquisitoperu.com/wp-content/uploads/2019/03/mayta.jpg" alt="Opción 3" style="width: 200px; height: auto; border-radius: 5px;">
+                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: white; background-color: rgba(0, 0, 0, 0.7); padding: 5px; border-radius: 5px;">Restaurantes</div>
+            </div>
+        </div>
+    </div>
+    <div class="tramites-becas" id="tramites-becas">
+        <h2>Trámites y Becas</h2>
+        <div class="info-box">
+            <div onclick="showRequisitos()" style="cursor: pointer;">
+                <img src="https://emiliabarciaboniffatti.edu.pe/wp-content/uploads/2022/06/tramites.jpeg" alt="Información">
+                <p>Trámites</p>
+                <p>- Carnet de biblioteca</p>
+                <p>- Carnet universitario</p>
+                <p>- Ingreso al comedor</p>
+            </div>
+            <div onclick="showPasosBecas()" style="cursor: pointer;">
+                <img src="https://www.mequieroir.com/wp-content/uploads/2019/11/beca-global.png" alt="Becas">
+                <p>Becas</p>
+            </div>
+        </div>
+    </div>
+    <div class="requisitos" id="requisitos">
+        <h2>Trámites (Requisitos)</h2>
+        <div class="info-box">
+            <div onclick="showCarnetBiblioteca()" style="cursor: pointer;">
+                <img src="https://uncp.edu.pe/wp-content/uploads/2024/05/FOTOS-BIBLIOTECA-8-1024x683.jpg" alt="Requisito 1">
+                <p>Carnet de biblioteca</p>
+            </div>
+            <div onclick="showCarnetUniversitario()" style="cursor: pointer;">
+                <img src="https://carnetuniversitario.uncp.edu.pe/imagenes/grafico1.jpg" alt="Requisito 2">
+                <p>Carnet universitario</p>
+            </div>
+            <div onclick="showIngresoComedor()" style="cursor: pointer;">
+                <img src="https://hytimes.pe/wp-content/uploads/2023/04/Comensales-de-la-UNCP-hacen-cola-para-acceder-al-antiguo-comedor-universitario.jpg?x93906" alt="Requisito 3">
+                <p>Ingreso al comedor</p>
+            </div>
+        </div>
+    </div>
+    <div class="carnet-biblioteca" id="carnet-biblioteca">
+        <h2>Carnet de Biblioteca (Requisitos)</h2>
+        <div class="info-box">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_F_HbbFSHzqTtU-d1B9ZywNzW8p-hbMd4Iw&s" alt="Requisito 1">
+                <p>- Copia de la ficha de matrícula</p>
+            </div>
+            <div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/DNI_peruano.jpg/200px-DNI_peruano.jpg" alt="Requisito 2">
+                <p>- Copia del DNI (actualizado)</p>
+            </div>
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXvQkINhu2Z4K4uC2tLytjDDk-x2ujJs2plU-RIEwEM1YLRfbl70z0bk3YZvFa2B_VYYs&usqp=CAUt" alt="Requisito 3">
+                <p>- Realizar el pago de S/3.00 en Tesorería UNCP por el derecho a carnet</p>
+            </div>
+        </div>
+    </div>
+    <div class="carnet-universitario" id="carnet-universitario">
+        <h2>Carnet Universitario (Requisitos)</h2>
+        <div class="info-box">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZUltG8qnVtogAdJVD_IG7iH0P7OJ1JhRlTg&s" alt="Requisito 1">
+                <p>- Realizar el pago correspondiente en el banco afiliado o en el sistema de pagos en línea de la UNCP.</p>
+            </div>
+            <div>
+                <img src="https://www.stelorder.com/wp-content/uploads/2024/01/blog-recibo_de_pago.jpg" alt="Requisito 2">
+                <p>- En algunos casos, es necesario presentar una foto digital o una copia del recibo del pago.</p>
+            </div>
+            <div>
+                <img src="https://pandorafms.com/blog/wp-content/uploads/2018/11/datos-sobre-el-correo-electr%C3%B3nico-featured.pngg" alt="Requisito 3">
+                <p>- Escribe al correo fotocarnetuncp@uncp.edu.pe para consultas o actualizaciones</p>
+            </div>
+        </div>
+    </div>
+    <div class="ingreso-comedor" id="ingreso-comedor">
+        <h2>Ingreso al Comedor (Requisitos)</h2>
+        <div class="info-box">
+            <div>
+                <img src="https://uncp.edu.pe/wp-content/uploads/2023/01/1E3A0639-scaled.jpg" alt="Requisito 1">
+                <p>- Constancia SISFOH: Documento que indique tu clasificación como "pobre" o "extremadamente pobre".<br>- Solicitud escrita: Dirigida a la Dirección de Bienestar Universitario.</p>
+            </div>
+            <div>
+                <img src="https://uncp.edu.pe/wp-content/uploads/2023/09/1E3A4458-1024x683.jpg" alt="Requisito 2">
+                <p>- Copia del DNI: Vigente y legible.<br>- Constancia de matrícula: Que acredite tu condición de estudiante regular.</p>
+            </div>
+            <div>
+                <img src="https://uncp.edu.pe/wp-content/uploads/slider104/comedor2024.jpeg" alt="Requisito 3">
+                <p>- Declaración jurada de ingresos: Especificando los ingresos económicos de tu hogar.<br>- Carátula del expediente: Según formato proporcionado por la universidad.</p>
+            </div>
+        </div>
+    </div>
+    <div class="pasos-becas" id="pasos-becas">
+        <h2>Pasos para Becas en la UNCP</h2>
+        <div class="info-box">
+            <div>
+                <p>Pasos específicos para obtener una beca en la UNCP:</p>
+                <ol>
+                    <li>Determina la beca adecuada:
+                        <ul>
+                            <li>Beca Permanencia: Apoyo económico para estudiantes con dificultades financieras.</li>
+                            <li>Becas de Intercambio Estudiantil: Movilidad entre universidades nacionales e internacionales.</li>
+                            <li>Becas para Comunidades Nativas: Destinada a estudiantes de origen indígena o en situación vulnerable.</li>
+                        </ul>
+                    </li>
+                    <li>Reúne los requisitos generales:
+                        <ul>
+                            <li>Estar matriculado como estudiante regular.</li>
+                            <li>Pertenecer al tercio o quinto superior de tu facultad.</li>
+                            <li>No tener cursos desaprobados.</li>
+                            <li>Presentar tu clasificación socioeconómica (por ejemplo, constancia del SISFOH si aplica).</li>
+                            <li>Para becas de intercambio, contar con una carta de aceptación de la universidad de destino.</li>
+                        </ul>
+                    </li>
+                    <li>Postula a través de la oficina correspondiente:
+                        <ul>
+                            <li>Para becas nacionales, acércate a la Dirección de Bienestar Universitario.</li>
+                            <li>Para intercambio estudiantil o becas internacionales, consulta en la Oficina de Cooperación y Relaciones Internacionales.</li>
+                        </ul>
+                    </li>
+                    <li>Proceso de postulación:
+                        <ul>
+                            <li>Llena el formulario oficial proporcionado por la universidad.</li>
+                            <li>Presenta un expediente con documentos requeridos, como:
+                                <ul>
+                                    <li>DNI vigente.</li>
+                                    <li>Constancia de matrícula.</li>
+                                    <li>Carta de motivación (para justificar tu interés en la beca).</li>
+                                    <li>Informe socioeconómico emitido por la universidad o el SISFOH.</li>
+                                    <li>Otros documentos según el tipo de beca (por ejemplo, plan de actividades o presupuesto para intercambios).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Evaluación y resultados:
+                        <ul>
+                            <li>Tu solicitud será evaluada por la oficina correspondiente.</li>
+                            <li>Los resultados serán publicados en la página web de la UNCP o se te notificará directamente.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <div>
+                <img src="https://uncp.edu.pe/wp-content/uploads/2023/05/1-1024x683.jpg" alt="Información sobre becas" style="width: 200px; height: auto; border-radius: 5px;">
+            </div>
+        </div>
+    </div>
+    <div class="losas-grass" id="losas-grass">
+        <h2>Losas y Grass</h2>
+        <div class="info-box">
+            <div>
+                <p>Losa San Martin</p>
+                <img src="https://i.postimg.cc/Y0p10JW9/losa-san-martin.jpg" alt="Losa San Martin" style="width: 300px; height: auto;"> <!-- Aumentar tamaño de imagen -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Losa+San+Martin" target="_blank">Ver en Google Maps</a>
+            </div>
+            <div>
+                <p>Parque San Pedro</p>
+                <img src="https://i.postimg.cc/rpHVKWRt/parque-san-pedro.jpg" alt="Parque San Pedro" style="width: 300px; height: auto;"> <!-- Aumentar tamaño de imagen -->
+                <a href="https://maps.app.goo.gl/4GAGA361vU22XFjWA" target="_blank">Ver en Google Maps</a>
+            </div>
+            <div>
+                <p>Wanka Gol</p>
+                <img src="https://i.postimg.cc/y8PyRhKx/wanka-gol.jpg" alt="Wanka Gol" style="width: 300px; height: auto;"> <!-- Aumentar tamaño de imagen -->
+                <a href="https://maps.app.goo.gl/7PSwkVr9kAVsn5DD6" target="_blank">Ver en Google Maps</a>
+            </div>
+            <div>
+                <p>Concap</p>
+                <img src="https://i.postimg.cc/NMPNH61m/concap.jpg" alt="Concap" style="width: 300px; height: auto;"> <!-- Aumentar tamaño de imagen -->
+                <a href="https://maps.app.goo.gl/LzEjXXaUu2BdsFwt6" target="_blank">Ver en Google Maps</a>
+            </div>
+            <div>
+                <p>El Papacho</p>
+                <img src="https://i.postimg.cc/qMHFXGPx/el-papacho.jpg" alt="El Papacho" style="width: 300px; height: auto;"> <!-- Aumentar tamaño de imagen -->
+                <a href="https://maps.app.goo.gl/3RUaagsFHBuEm9f66" target="_blank">Ver en Google Maps</a>
+            </div>
+        </div>
+    </div> 
+    <div id="info-box" class="info-box"></div>
+    <div class="info-restaurante" id="info-restaurante" style="display: none;">
+        <h2>Información del Restaurante</h2>
+        <div id="restaurante-info" class="info-box"></div>
+    </div>
+  
+  <div class="acerca" id="acerca" style="display: none;"> 
+        <h2>Acerca de UniGuia</h2>
+        <div class="info-box">
+            <div style="text-align: left;">
+                <p>UniGuia es una iniciativa creada por estudiantes de la Universidad Nacional del Centro del Perú (UNCP) con el objetivo de brindar una guía completa y amigable para los ingresantes, facilitando su integración a la vida universitaria. </p>
+
+                <p>Nuestro equipo está formado por estudiantes apasionados por la UNCP y comprometidos con la educación de calidad.  Entendemos los desafíos que enfrentan los ingresantes al llegar a una nueva universidad y queremos hacer que su transición sea más fluida y exitosa.</p>
+            </div>
+        </div>
+
+        <h3>Nuestra Misión</h3>
+        <div class="info-box">
+            <div style="text-align: left;">
+                <p>Ayudar a los nuevos estudiantes de la UNCP a familiarizarse con la universidad, sus servicios, trámites, recursos y espacios, para que puedan desenvolverse con seguridad y confianza desde el primer día.  Queremos que los ingresantes sientan que la UNCP es su casa.</p>
+            </div>
+        </div>
+
+        <h3>Nuestros Valores</h3>
+        <div class="info-box">
+            <div style="text-align: left;">
+                <ul>
+                    <li><strong>Colaboración:</strong> Trabajamos en equipo para ofrecer una guía útil y completa.</li>
+                    <li><strong>Innovación:</strong> Buscamos herramientas y recursos innovadores para facilitar la experiencia universitaria.</li>
+                    <li><strong>Accesibilidad:</strong>  Nuestra guía está disponible para todos los ingresantes,  sin importar su procedencia o condición.</li>
+                    <li><strong>Compromiso:</strong>  Nos comprometemos a brindar información precisa y actualizada para apoyar a los estudiantes.</li>
+                </ul>
+            </div>
+            
+        </div>
+
+        <p>Creemos que una buena orientación es fundamental para el éxito de los estudiantes. ¡Bienvenidos a la UNCP!</p>
+    </div>
+  
+    <script>
+        function registrar() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const codigo = document.getElementById('codigo').value.trim();
+            const facultad = document.getElementById('facultad').value.trim();
+            if (nombre === '' || codigo === '' || facultad === '') {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+            // Ocultar pantalla de registro y mostrar contenido principal
+            document.getElementById('register-screen').style.display = 'none';
+            document.querySelector('header').style.display = 'flex';
+            document.querySelector('.hero-section').style.display = 'flex';
+        }
+        function showTramitesBecas() {
+            document.querySelector('.hero-section').style.display = 'none'; // Ocultar el contenido actual
+            document.getElementById('tramites-becas').style.display = 'block'; // Mostrar el nuevo contenido
+        }
+        function showRequisitos() {
+            document.getElementById('tramites-becas').style.display = 'none'; // Ocultar el contenido de Trámites y Becas
+            document.getElementById('requisitos').style.display = 'block'; // Mostrar el nuevo contenido de Requisitos
+        }
+        function showCarnetBiblioteca() {
+            document.getElementById('requisitos').style.display = 'none'; // Ocultar el contenido de Requisitos
+            document.getElementById('carnet-biblioteca').style.display = 'block'; // Mostrar el nuevo contenido de Carnet de Biblioteca
+        }
+        function showCarnetUniversitario() {
+            document.getElementById('requisitos').style.display = 'none'; // Ocultar el contenido de Requisitos
+            document.getElementById('carnet-universitario').style.display = 'block'; // Mostrar el nuevo contenido de Carnet Universitario
+        }
+        function showIngresoComedor() {
+            document.getElementById('requisitos').style.display = 'none'; // Ocultar el contenido de Requisitos
+            document.getElementById('ingreso-comedor').style.display = 'block'; // Mostrar el nuevo contenido de Ingreso al Comedor
+        }
+        function showPasosBecas() {
+            document.getElementById('tramites-becas').style.display = 'none'; // Ocultar el contenido de Trámites y Becas
+            document.getElementById('pasos-becas').style.display = 'block'; // Mostrar el nuevo contenido de Pasos para Becas
+        }
+        function showLosas() {
+            document.querySelector('.hero-section').style.display = 'none'; // Ocultar el contenido actual
+            document.getElementById('losas-grass').style.display = 'block'; // Mostrar el nuevo contenido de Losas y Grass
+        }
+        function showRestaurantes() {
+            document.querySelector('.hero-section').style.display = 'none'; // Ocultar el contenido actual
+            document.getElementById('restaurantes').style.display = 'block'; // Mostrar el nuevo contenido de Restaurantes
+            showImages(); // Asegúrate de llamar a showImages aquí
+        }
+      
+      function showAcerca() {
+            document.querySelector('.hero-section').style.display = 'none'; 
+            document.getElementById('acerca').style.display = 'block'; 
+        }
+
+        // Agrega este evento al enlace del menú "Acerca de"
+        document.querySelector('nav a[href="#acerca"]').onclick = showAcerca;
+
+
+        // Agrega este evento al enlace del menú "Acerca de"
+        document.querySelector('nav a[href="#acerca"]').onclick = showAcerca;
+      
+      
+        function showRestauranteInfo(index) {
+            const infoRestaurante = [
+                {
+                    name: "Restaurant SOFIA <p> contacto: 963240495",
+                    description: "Un lugar ideal para disfrutar de la cocina local. Ofrece una experiencia culinaria auténtica, con platos tradicionales preparados con ingredientes frescos y de alta calidad. Su ambiente acogedor y familiar lo convierte en un lugar perfecto para compartir una comida con amigos o familiares.",
+                    images: [
+                        "https://i.postimg.cc/NF4cRw32/1-1.jpg",
+                        "https://i.postimg.cc/k4FjMNRq/1-3.jpg",
+                        "https://i.postimg.cc/sfWStPGN/1-5.jpg",
+                        "https://i.postimg.cc/HWhfZy7n/1-7.jpg"
+                    ]
+                },
+                {
+                    name: "Cevicheria EL PICANTE <p> contacto: 920477557",
+                    description: "Si buscas un ceviche fresco y delicioso, esta cevicheria es el lugar perfecto. Su especialidad es el ceviche picante, preparado con pescado fresco y una combinación de ingredientes que le dan un sabor único. También ofrecen una variedad de mariscos frescos, como conchas, pulpo y langostinos. Su ambiente es acogedor y te hará sentir como en casa.",
+                    images: [
+                        "https://i.postimg.cc/cJWHvjsp/2-1.jpg",
+                        "https://i.postimg.cc/3wrkL6Pg/2-3.jpg",
+                        "https://i.postimg.cc/Z5HRyHC0/2-4.jpg",
+                        "https://i.postimg.cc/6qKJcsPK/2-6.jpg"
+                    ]
+                },
+                {
+                    name: "Restaurante ANITA <p> contacto: 940973230",
+                    description: "Un lugar familiar donde puedes disfrutar de platos tradicionales peruanos. Ofrece una variedad de platos típicos, como lomo saltado, arroz con pollo, causa rellena, entre otros. Su ambiente es cálido y acogedor, ideal para una comida en familia o con amigos.",
+                    images: [
+                        "https://i.postimg.cc/dQjzFxX7/3-1.jpg",
+                        "https://i.postimg.cc/t7012gjT/3-3.jpg",
+                        "https://i.postimg.cc/XqN33Sk8/3-7.jpg",
+                        "https://i.postimg.cc/0QwKmST3/3-5.jpg"
+                    ]
+                },
+                {
+                    name: "cevicheria el LIMONCITO <p> contacto: 918164971",
+                    description: " Este restaurante te ofrece auténticas pizzas italianas hechas al horno de leña. Su masa es elaborada con ingredientes de alta calidad y su horno de leña le da un sabor único. Puedes elegir entre una variedad de pizzas con diferentes ingredientes, desde las clásicas hasta las más innovadoras.",
+                    images: [
+                        "https://i.postimg.cc/KY7dYpzs/4-1.jpg",
+                        "https://i.postimg.cc/j5158jbf/4-2.jpg",
+                        "https://i.postimg.cc/bwL2xpsx/4-4.jpg",
+                        "https://i.postimg.cc/tT6TMjCm/4-5.jpg"
+                    ]
+                },
+                {
+                    name: "restaurante el LIMONCITO <p> contacto: 918164971",
+                    description: "Si eres amante del sushi, este restaurante es para ti. Ofrece deliciosos rolls de sushi y sashimi en un ambiente moderno. Sus ingredientes son frescos y de alta calidad, y su chef tiene una gran experiencia en la preparación de sushi. También ofrecen una variedad de platos japoneses tradicionales.",
+                    images: [
+                        "https://i.postimg.cc/KY7dYpzs/4-1.jpg",
+                        "https://i.postimg.cc/CMZt9K0K/5-2.jpg",
+                        "https://i.postimg.cc/FHn0thN9/5-3.jpg",
+                        "https://i.postimg.cc/Y0strD9m/5-4.jpg"
+                    ]
+                },
+                {
+                    name: "ANUBIS restobar <p> contacto: 98036162",
+                    description: " Un lugar acogedor para disfrutar de la comida criolla y pasar un rato agradable con amigos. Ofrece una variedad de platos criollos, como ají de gallina, causa rellena, seco de res, entre otros. También tienen una gran variedad de cócteles y cervezas artesanales.",
+                    images: [
+                        "https://i.postimg.cc/NjT2nmJx/6-2.jpg",
+                        "https://i.postimg.cc/1z2TzxcS/6-1.jpg",
+                        "https://i.postimg.cc/sf4rTX4Z/6-4.jpg",
+                        "https://i.postimg.cc/9M2k9dSg/6-5.jpg"
+                    ]
+                },
+                {
+                    name: "DELICIAS Y SABORES <p> contacto: 995842430",
+                    description: "Un lugar perfecto para disfrutar de un café y postres caseros. Ofrece una variedad de cafés, desde el clásico espresso hasta el cappuccino. Sus postres son hechos con ingredientes frescos y son una delicia para el paladar. Es un lugar ideal para una tarde tranquila o para tomar un café con amigos.",
+                    images: [
+                        "https://i.postimg.cc/ZK6fh7q9/7-4.jpg",
+"https://i.postimg.cc/9MqdY0R4/7-5.jpg",
+"https://i.postimg.cc/Bbmn8cS2/7-6.jpg",
+"https://i.postimg.cc/gjQ1Bn4f/7-7.jpg"
+                    ]
+                },
+                {
+                    name: "OK CHICKEN <p> contacto: 978725836",
+                    description: "Si buscas comida china-peruana, este restaurante es una buena opción. Ofrece una variedad de platos deliciosos, como pollo a la naranja, tallarines saltados, chaufa, entre otros. Su ambiente es sencillo y agradable, ideal para una comida rápida y sabrosa.",
+                    images: [
+                        "https://i.postimg.cc/GhYs76mf/8-3.jpg",
+"https://i.postimg.cc/4xW4B1VM/8-4.jpg",
+"https://i.postimg.cc/63sk07jg/8-5.jpg",
+"https://i.postimg.cc/3Jbb14W1/8-6.jpg"
+                    ]
+                },
+                {
+                    name: "Restaurant DORAEMON <p> contacto: 982314842",
+                    description: "Un restaurante familiar que ofrece platos típicos peruanos. Su especialidad es el lomo saltado, preparado con carne de res de alta calidad y una combinación de ingredientes que le dan un sabor único. También ofrecen una variedad de otros platos peruanos, como arroz con pollo, causa rellena, entre otros.",
+                    images: [
+                        "https://i.postimg.cc/HLSfqZLG/9-4.jpg",
+"https://i.postimg.cc/MZ19R38W/9-5.jpg",
+"https://i.postimg.cc/1RMNLDGG/9-6.jpg",
+"https://i.postimg.cc/ZYgJBR4k/9-7.jpg"
+                    ]
+                },
+                {
+                    name: "restaurant SECACOTIO <p> contacto.996454545",
+                    description: "Un bar con una gran variedad de cócteles y cervezas artesanales. Su ambiente es moderno y animado, ideal para pasar una noche divertida con amigos. Ofrece una gran variedad de cócteles, desde los clásicos hasta los más innovadores. También tienen una selección de cervezas artesanales de diferentes regiones del país.",
+                    images: [
+                        "https://i.postimg.cc/tgPvSjg7/10-2.jpg",
+"https://i.postimg.cc/hv304yGH/10-3.jpg",
+"https://i.postimg.cc/JzXQmQC2/10-4.jpg",
+"https://i.postimg.cc/fykxPcv5/10-5.jpg"
+                    ]
+                },
+                {
+                    name: "MENU <p> contacto: 967542990",
+                    description: "Si eres amante de los mariscos, este restaurante es para ti. Ofrece deliciosos platos de mariscos frescos en un ambiente relajante. Su especialidad es el ceviche, preparado con pescado fresco y una combinación de ingredientes que le dan un sabor único. También ofrecen una variedad de otros platos de mariscos, como conchas, pulpo y langostinos.",
+                    images: [
+                        "https://i.postimg.cc/7Y2zTYtC/11-2.jpg",
+"https://i.postimg.cc/rF1SPw1B/11-3.jpg",
+"https://i.postimg.cc/V60tBfsH/11-4.jpg",
+"https://i.postimg.cc/Vk70xrdV/11-5.jpg"
+                    ]
+                },
+                {
+                    name: "chifa  NORYS <p> contacto: 952886523",
+                    description: "Un lugar acogedor para disfrutar de la comida casera. Ofrece una variedad de platos chinos, como chaufa, tallarines saltados, wantanes, entre otros. Su ambiente es familiar y agradable, ideal para una comida tranquila y sabrosa.",
+                    images: [
+                       "https://i.postimg.cc/ncyPvrHN/12-6.jpg",
+"https://i.postimg.cc/j2WMf0Bs/12-7.jpg",
+"https://i.postimg.cc/0yGcDCXJ/12-8.jpg",
+"https://i.postimg.cc/x80zrKyB/12-9.jpg"
+                    ]
+                },
+                {
+                    name: "restauran YUNZA <p> contacto: 989076178",
+                    description: "Si buscas una experiencia culinaria gourmet, este restaurante es para ti. Ofrece una variedad de platos internacionales, preparados con ingredientes de alta calidad y con una presentación impecable. Su ambiente es elegante y sofisticado, ideal para una cena romántica o una comida de negocios.",
+                    images: [
+                        "https://i.postimg.cc/ZRLLyYft/13-6.jpg",
+"https://i.postimg.cc/dt39LYrp/13-7.jpg",
+"https://i.postimg.cc/nzn4Zbnd/13-8.jpg",
+"https://i.postimg.cc/BbVHxjHy/13-9.jpg"
+                    ]
+                },
+                {
+                    name: "LA CASONA",
+                    description: "Un restaurante que ofrece platos internacionales y una gran variedad de vinos. Su ambiente es cálido y acogedor, ideal para una comida en familia o con amigos. Ofrece una variedad de platos, desde las pastas italianas hasta las carnes argentinas. También tienen una selección de vinos de diferentes regiones del mundo.",
+                    images: [
+                        "https://i.postimg.cc/BnGtR5Sp/14-2.jpg",
+"https://i.postimg.cc/2506qP49/14-3.jpg",
+"https://i.postimg.cc/8c6P0cxx/14-4.jpg",
+"https://i.postimg.cc/RZzTSbQn/14-5.jpg"
+                    ]
+                },
+                {
+                    name:"LA CHOZA RUSTICA",
+                    description: "Un restaurante que ofrece comida tradicional peruana con un toque moderno. Sus platos son preparados con ingredientes frescos y de alta calidad, y su chef tiene una gran experiencia en la cocina peruana. Su ambiente es rústico y acogedor, ideal para una comida en familia o con amigos.",
+                    images: [
+                       "https://i.postimg.cc/L8X81mTd/15-3.jpg",
+"https://i.postimg.cc/59S4KXKd/15-4.jpg",
+"https://i.postimg.cc/3wG7XN0q/15-5.jpg",
+"https://i.postimg.cc/6qWXxhbs/15-6.jpg"
+                    ]
+                }
+            ];
+            const selectedRestaurante = infoRestaurante[index];
+            const restauranteInfoDiv = document.getElementById('restaurante-info');
+            restauranteInfoDiv.innerHTML = '';
+            const titleDiv = document.createElement('div');
+            titleDiv.innerHTML = `<h3>${selectedRestaurante.name}</h3>`;
+            restauranteInfoDiv.appendChild(titleDiv);
+            const imagesContainer = document.createElement('div');
+            imagesContainer.className = 'restaurant-images'; 
+            imagesContainer.style.display = 'flex';
+            imagesContainer.style.justifyContent = 'center';
+            imagesContainer.style.marginTop = '20px';
+            imagesContainer.style.flexWrap = 'wrap'; 
+            const imagesToShow = selectedRestaurante.images; 
+            imagesToShow.forEach((imgSrc) => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.style.width = '300px'; 
+                img.style.margin = '10px'; 
+                img.style.borderRadius = '5px';
+                imagesContainer.appendChild(img);
+            });
+            restauranteInfoDiv.appendChild(imagesContainer); 
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.innerHTML = `<p>${selectedRestaurante.description}</p>`;
+            descriptionDiv.style.maxWidth = '600px'; 
+            descriptionDiv.style.margin = '0 auto'; 
+            restauranteInfoDiv.appendChild(descriptionDiv); 
+            document.getElementById('losas-grass').style.display = 'none'; 
+            document.getElementById('restaurantes').style.display = 'none'; 
+            document.getElementById('info-restaurante').style.display = 'block'; 
+        }
+        let currentSlide = 0;
+        const restaurantImages = [
+            "https://i.postimg.cc/Nf2FMfj5/1-2.jpg",
+            "https://i.postimg.cc/3wrkL6Pg/2-3.jpg",
+            "https://i.postimg.cc/VLj9pxHT/3-4.jpg",
+            "https://i.postimg.cc/zDLSqb39/4-3.jpg",
+          "https://i.postimg.cc/FHn0thN9/5-3.jpg",
+          "https://i.postimg.cc/65VyLtyH/6-3.jpg",
+          "https://i.postimg.cc/VkBHXGQy/7-3.jpg",
+          "https://i.postimg.cc/9Q7wkKXS/8-2.jpg",
+          "https://i.postimg.cc/NMgWShtk/9-2.jpg",
+          "https://i.postimg.cc/Pq89gDSX/10-1.jpg",
+          "https://i.postimg.cc/7Y2zTYtC/11-2.jpg",
+          "https://i.postimg.cc/J7bD1dsJ/12-1.jpg",
+          "https://i.postimg.cc/x8C1ygPj/13-1.jpg",
+          "https://i.postimg.cc/BnGtR5Sp/14-2.jpg",
+          "https://i.postimg.cc/L8X81mTd/15-3.jpg",
+        ];
+        const restaurantNames = [
+            "Restaurant SOFIA",
+            "Cevicheria EL PICANTE",
+            "Restaurante ANITA",
+            "cevicheria el LIMONCITO",
+            "restaurante el LIMONCITO",
+            "ANUBIS restobar",
+            "DELICIAS Y SABORES",
+            "OK CHICKEN",
+            "Restaurant DORAEMON",
+            "restaurant SECACOTIO",
+            "MENU",
+            "chifa  NORYS",
+            "restauran YUNZA",
+            "LA CASONA",
+            "LA CHOZA RUSTICA"
+        ];
+        function showImages() {
+            const imageWrapper = document.getElementById('image-wrapper');
+            imageWrapper.innerHTML = ''; 
+            const imagesToShow = restaurantImages.slice(currentSlide, currentSlide + 3); 
+            const namesToShow = restaurantNames.slice(currentSlide, currentSlide + 3); 
+            imagesToShow.forEach((src, index) => {
+                const div = document.createElement('div');
+                div.style.textAlign = 'center'; 
+                const img = document.createElement('img');
+                img.src = src;
+                img.style.width = '70%'; 
+                img.style.height = 'auto';
+                img.style.maxWidth = '700px'; 
+                const name = document.createElement('p');
+                name.textContent = namesToShow[index]; 
+                name.style.color = 'black';
+                // Agregar evento onclick a la imagen
+                img.onclick = () => showRestauranteInfo(currentSlide + index);
+                div.appendChild(img); 
+                div.appendChild(name); 
+                imageWrapper.appendChild(div); 
+            });
+        }
+        function moveSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) {
+                currentSlide = restaurantImages.length - 3; 
+            } else if (currentSlide >= restaurantImages.length) {
+                currentSlide = 0; 
+            }
+            showImages(); 
+        }
+        showImages();
+      
+    </script>
+    <div class="restaurantes" id="restaurantes" style="display: none;">
+        <h2>Restaurantes</h2>
+        <div class="image-slider" style="display: flex; align-items: center; justify-content: center; flex-direction: column; margin-top: 60px;">
+            <h1 style="margin-bottom: 30px; color: black;"> Restaurantes UNCP</h1>
+            <button class="arrow" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider-container" style="display: flex; overflow: hidden; width: 70%;">
+                <div id="image-wrapper" style="display: flex; transition: transform 0.5s;"></div> 
+            </div>
+            <button class="arrow" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </div>
+<div class="contacto" id="contacto" style="display: none;">
+    <h2>Contacto</h2>
+    <form action="https://formspree.io/f/mgverqzr" method="POST">
+        <label>
+            Tu correo electrónico:
+            <input type="email" name="email" required>
+        </label>
+        <label>
+            Tu mensaje:
+            <textarea name="message" required></textarea>
+        </label>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+<script>
+    function showContact() {
+        document.querySelector('.hero-section').style.display = 'none'; 
+        document.getElementById('contacto').style.display = 'block'; 
+    }
+    document.querySelector('nav a[href="#contacto"]').onclick = showContact;
+</script>
+</body>
+</html>
